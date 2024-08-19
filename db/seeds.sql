@@ -12,6 +12,6 @@ INSERT INTO role (title, salary, department_id) VALUES
 INSERT INTO employee (first_name, last_name, role_id) VALUES
 ('Mary', 'Jane', (SELECT id FROM role WHERE title = 'Sales Manager')),
 ('Peyton', 'Sawyer', (SELECT id FROM role WHERE title = 'Sales Associate')),
-('Bronson', 'Ferguson', (SELECT id FROM role WHERE title = 'Sales Associate')),
+('Bryce', 'Ferguson', (SELECT id FROM role WHERE title = 'Sales Associate')),
 ('Richard', 'Brown', (SELECT id FROM role WHERE title = 'Software Engineer')),
 ('CJ', 'Rodrigues', (SELECT id FROM role WHERE title = 'Lead Engineer'));
