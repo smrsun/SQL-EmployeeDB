@@ -17,4 +17,8 @@ const pool = new Pool({
 },
 console.log(`Connected to Employee Database`));
 
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+
 module.exports = pool;
