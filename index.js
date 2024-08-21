@@ -1,16 +1,6 @@
 const inquirer = require('inquirer');
 const queries = require('./queries');
-const { Client } = require('pg');
 
-const client = new Client({
-  user: 'username',
-  host: 'localhost',
-  database: 'employee_db',
-  password: 'password',
-  port: 5432,
-});
-
-client.connect();
 
 const start = async () => {
   const answers = await inquirer.prompt({
@@ -120,5 +110,9 @@ const start = async () => {
     default:
       console.log('Invalid action selected');
   }
-  start();
+  await start();
 };
+  start();
+
+
+
