@@ -1,8 +1,9 @@
 const { Pool } = require('pg');
+require('dotenv').config();
 
 const pool = new Pool({
   user: 'postgres',
-  password: `@Ihavegr8kid$!`,
+  password: process.env.DB_PASSWORD,
   host: 'localhost',
   database: 'employee_db',
   port: 5432,
@@ -12,19 +13,20 @@ pool.connect();
 
 const viewDepartments = async () => {
   const res = await pool.query('SELECT * FROM departments');
-  console.log(res.rows)
+ // console.log("Query Data: ", res);
+  console.table(res.rows)
   return res.rows;
 };
 
 const viewRoles = async () => {
   const res = await pool.query(`SELECT * FROM roles`);
-  console.log(res.rows)
+  console.table(res.rows)
   return res.rows;
 };
 
 const viewEmployees = async () => {
   const res = await pool.query(`SELECT * FROM employees`);
-  console.log(res.rows)
+  console.table(res.rows)
   return res.rows;
 
 };
@@ -36,7 +38,7 @@ const addDepartment = async (name) => {
 
 const addRole = async (title, salary, department_id) => {
   const res = await pool.query(
-    'INSERT INTO roles (title, salary, department_id) VALUES ($1, $2, $3)',
+    'INSERT INTO roles (title, salary, departments_id) VALUES ($1, $2, $3)',
     [title, salary, department_id]
   );
   return res.rows[0];

@@ -2,16 +2,16 @@
 INSERT INTO departments (name) VALUES ('Sales'), ('Engineering'), ('HR');
 
 --ADDED SEED ROLES
-INSERT INTO roles (title, salary, department_id) VALUES
-('Sales Manager', 80000, (SELECT id FROM departments WHERE name = 'Sales')),
-('Sales Associate', 60000, (SELECT id FROM departments WHERE name = 'Sales')),
-('Lead Enginieer', 200000, (SELECT id FROM departments WHERE name = 'Engineering')),
-('Software Engineer', 120000, (SELECT id FROM departments WHERE name = 'Engineering'));
+INSERT INTO roles (title, salary, departments_id) VALUES
+('Sales Manager', 80000, 1),
+('Sales Associate', 60000, 1),
+('Lead Engineer', 200000, 2),
+('Software Engineer', 120000, 2);
 
 --ADDED SEED EMPLOYEES 
-INSERT INTO employees (first_name, last_name, role_id) VALUES
-('Mary', 'Jane', (SELECT id FROM roles WHERE title = 'Sales Manager')),
-('Peyton', 'Sawyer', (SELECT id FROM roles WHERE title = 'Sales Associate')),
-('Bryce', 'Ferguson', (SELECT id FROM roles WHERE title = 'Sales Associate')),
-('Richard', 'Brown', (SELECT id FROM roles WHERE title = 'Software Engineer')),
-('CJ', 'Rodrigues', (SELECT id FROM roles WHERE title = 'Lead Engineer'));
+INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES
+('Mary', 'Jane', 1, NULL),
+('Peyton', 'Sawyer', 2, 1),
+('Bryce', 'Ferguson', 2, 1),
+('Richard', 'Brown', 4, 3),
+('CJ', 'Rodrigues', 3, NULL);

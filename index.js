@@ -15,19 +15,23 @@ const start = async () => {
       'Add a role',
       'Add an employee',
       'Update an employee role',
+      'Quit',
     ],
   });
   switch (answers.action) {
     case 'View all departments':
       const departments = await queries.viewDepartments();
+      start();
       break;
 
     case 'View all roles':
       const roles = await queries.viewRoles();
+      start();
       break;
 
     case 'View all employees':
       const employees = await queries.viewEmployees();
+      start();
       break;
 
     case 'Add a department':
@@ -38,6 +42,7 @@ const start = async () => {
       });
       await queries.addDepartment(departmentName);
       console.log('Department has been added');
+      start();
       break;
 
     case 'Add a role':
@@ -49,7 +54,7 @@ const start = async () => {
         },
         {
           type: 'input',
-          name: 'roleTitle',
+          name: 'roleSalary',
           message: 'Enter the salary',
         },
         {
@@ -60,6 +65,7 @@ const start = async () => {
       ]);
       await queries.addRole(roleTitle, roleSalary, departmentId);
       console.log('Role has been added');
+      start();
       break;
 
     case 'Add an employee':
@@ -86,8 +92,10 @@ const start = async () => {
           default: null,
         },
       ]);
+  
       await queries.addEmployee(firstName, lastName, roleId, managerId);
       console.log('Employee added.');
+      start();
       break;
 
     case 'Update an employee role':
@@ -103,16 +111,24 @@ const start = async () => {
           message: 'Enter the updated role ID',
         },
       ]);
-      await queries.updateEmployeeRole(employeeId, newRoleId);
+      await queries.updateRole(employeeId, newRoleId);
       console.log('New employee role updated.');
+      start();
       break;
+     
+      case 'Quit': quit();
 
     default:
-      console.log('Invalid action selected');
+     quit()
   }
-  await start();
-};
-  start();
+  // await start();
 
+ 
+};
+ start();
+
+  function quit() {
+    process.exit();
+  }
 
 
