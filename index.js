@@ -4,6 +4,7 @@ const queries = require('./queries');
 
 const start = async () => {
   const answers = await inquirer.prompt({
+    loop: false,
     type: 'list',
     name: 'action',
     message: 'What would you like to do?',
@@ -116,7 +117,7 @@ const start = async () => {
       start();
       break;
      
-      case 'Quit': quit();
+      case 'Quit': quit(); break;
 
     default:
      quit()

@@ -13,22 +13,21 @@ pool.connect();
 
 const viewDepartments = async () => {
   const res = await pool.query('SELECT * FROM departments');
- // console.log("Query Data: ", res);
-  console.table(res.rows)
+  // console.log("Query Data: ", res);
+  console.table(res.rows);
   return res.rows;
 };
 
 const viewRoles = async () => {
   const res = await pool.query(`SELECT * FROM roles`);
-  console.table(res.rows)
+  console.table(res.rows);
   return res.rows;
 };
 
 const viewEmployees = async () => {
   const res = await pool.query(`SELECT * FROM employees`);
-  console.table(res.rows)
+  console.table(res.rows);
   return res.rows;
-
 };
 
 const addDepartment = async (name) => {
