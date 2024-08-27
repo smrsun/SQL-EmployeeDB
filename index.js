@@ -39,7 +39,7 @@ const start = async () => {
       const { departmentName } = await inquirer.prompt({
         type: 'input',
         name: 'departmentName',
-        message: 'Enter name of the department you would like to add to',
+        message: 'Enter name of the department you would like to add',
       });
       await queries.addDepartment(departmentName);
       console.log('Department has been added');

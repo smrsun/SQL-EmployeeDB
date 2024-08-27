@@ -19,6 +19,8 @@ CREATE TABLE employees (
   id SERIAL PRIMARY KEY,
   first_name VARCHAR(50) NOT NULL,
   last_name VARCHAR(50) NOT NULL,
-  role_id INTEGER REFERENCES roles(id),
-  manager_id INTEGER REFERENCES employees(id)
+  role_id INTEGER NOT NULL,
+  CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE,
+  manager_id INTEGER REFERENCES manager(id),
+  CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employees(id) ON DELETE CASCADE  
 );

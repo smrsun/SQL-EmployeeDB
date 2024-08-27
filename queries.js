@@ -12,7 +12,7 @@ const pool = new Pool({
 pool.connect();
 
 const viewDepartments = async () => {
-  const res = await pool.query('SELECT * FROM departments');
+  const res = await pool.query(`SELECT * FROM departments`);
   // console.log("Query Data: ", res);
   console.table(res.rows);
   return res.rows;
@@ -35,16 +35,16 @@ const addDepartment = async (name) => {
   return res.rows[0];
 };
 
-const addRole = async (title, salary, department_id) => {
+const addRole = async (title, salary, departments_id) => {
   const res = await pool.query(
     'INSERT INTO roles (title, salary, departments_id) VALUES ($1, $2, $3)',
-    [title, salary, department_id]
+    [title, salary, departments_id]
   );
   return res.rows[0];
 };
 
 const addEmployee = async (first_name, last_name, role_id, manager_id) => {
-  const res = await pool.query(
+  const res = await pool.query (
     'INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)',
     [first_name, last_name, role_id, manager_id]
   );
