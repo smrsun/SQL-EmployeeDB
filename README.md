@@ -18,7 +18,7 @@ Run `npm install` to install dependencies. Ensure PostgreSQL is running and the 
 
 ## Walkthrough Video
 
-[Link to Walkthrough Video]()
+[Link to Walkthrough Video](https://1drv.ms/v/s!AlVbtas-VF_qiZMwoMeIfUA6s262LQ?e=8JUabc)
 
 ## GitHub Repo Page
 [My GitHub](https://github.com/smrsun/SQL-EmployeeDB)

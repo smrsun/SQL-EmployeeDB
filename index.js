@@ -47,6 +47,16 @@ const start = async () => {
       break;
 
     case 'Add a role':
+      const departmentArr = await queries.viewDepartments()
+  
+      const departmentChoices = departmentArr.map(dept => {
+        return { 
+          name: dept.name,
+          value: dept.id
+        }
+      })
+      console.log("Choices: ", departmentChoices)
+
       const { roleTitle, roleSalary, departmentId } = await inquirer.prompt([
         {
           type: 'input',
@@ -58,10 +68,16 @@ const start = async () => {
           name: 'roleSalary',
           message: 'Enter the salary',
         },
-        {
+       /* {
           type: 'input',
           name: 'departmentId',
           message: 'Enter department ID for this role',
+        }, */
+        {
+          type: 'list',
+          name: 'departmentId',
+          message: 'Enter department ID for this role',
+          choices: departmentChoices
         },
       ]);
       await queries.addRole(roleTitle, roleSalary, departmentId);
@@ -70,34 +86,45 @@ const start = async () => {
       break;
 
     case 'Add an employee':
-      const { firstName, lastName, roleId, managerId } = await inquirer.prompt([
-        {
-          type: 'input',
-          name: 'firstName',
-          message: 'Enter the employee first name:',
-        },
-        {
-          type: 'input',
-          name: 'lastName',
-          message: 'Enter the employee last name:',
-        },
-        {
-          type: 'input',
-          name: 'roleId',
-          message: 'Enter the role ID for the employee:',
-        },
-        {
-          type: 'input',
-          name: 'managerId',
-          message: 'Enter the manager ID (if applicable):',
-          default: null,
-        },
-      ]);
-  
-      await queries.addEmployee(firstName, lastName, roleId, managerId);
-      console.log('Employee added.');
-      start();
-      break;
+      try {
+        let { firstName, lastName, roleId, managerId } = await inquirer.prompt([
+          {
+            type: 'input',
+            name: 'firstName',
+            message: 'Enter the employee first name:',
+          },
+          {
+            type: 'input',
+            name: 'lastName',
+            message: 'Enter the employee last name:',
+          },
+          {
+            type: 'input',
+            name: 'roleId',
+            message: 'Enter the role ID for the employee:',
+          },
+          {
+            type: 'input',
+            name: 'managerId',
+            message: 'Enter the manager ID (if applicable):',
+         //   default: null,
+          },
+        ]);
+       // console.log(firstName, lastName, roleId, managerId);
+       // console.log(typeof managerId);
+       // Because we are RETURNED a STRING from the prompt() method we have to PROVIDE the CORRECT DATA TYPE to SQL
+       // DATA CONVERSION 
+       if(managerId == 'null' || managerId == 0 || managerId == 'NULL' || managerId == 'Null') {
+          managerId = null;
+        }
+        await queries.addEmployee(firstName, lastName, roleId, managerId);
+        console.log('Employee added.');
+        start();
+        break;
+        
+      } catch (error) {
+        console.log("Err: ", error);
+      }
 
     case 'Update an employee role':
       const { employeeId, newRoleId } = await inquirer.prompt([
